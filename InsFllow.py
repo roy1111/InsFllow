@@ -124,11 +124,11 @@ def followActiveAccount():
                 follow_button = driver.find_element_by_xpath("//button[contains(.,'Follow')]")  ## NO NEED TO CHANGE ELEMENT
                 
                 follow_button.click()
-                
-                FollowedUrList.append(driver.current_url)
-
+                             
                 WebDriverWait(driver, 20).until(EC.presence_of_element_located(
                     (By.XPATH, "//button[contains(.,'Following') or contains(.,'Requested')]")))
+                
+                FollowedUrList.append(driver.current_url)
 
             except Exception as e:
                 print e
@@ -151,10 +151,14 @@ def followActiveAccount():
                     PostAmount = driver.find_element_by_class_name('_fd86t').text
 #                     print ('Number Of Posts: '),PostAmount
 
-                    follow_button1 = driver.find_elements_by_xpath(
-                        "//button[contains(.,'Following')]")  ## NO NEED TO CHANGE ELEMENT
-                    follow_button2 = driver.find_elements_by_xpath(
-                        "//button[contains(.,'Requested')]")  ## NO NEED TO CHANGE ELEMENT
+                    try:
+                        follow_button1 = driver.find_elements_by_xpath(
+                            "//button[contains(.,'Following')]")  ## NO NEED TO CHANGE ELEMENT
+                        follow_button2 = driver.find_elements_by_xpath(
+                            "//button[contains(.,'Requested')]")  ## NO NEED TO CHANGE ELEMENT
+                
+                    except:
+                        print ("shit 1")
 
                     ## CHECKS IF ACCOUNT HAS NOT ALREADY BEEN FOLLOWED
                     if follow_button1.__len__() == 0 and follow_button2.__len__() == 0:
@@ -218,17 +222,17 @@ def Unfollow(FollowedUrList):
             
             after = time.time()
 
-            LoadingTime = waitUntilTimeReached(now, after, 42)
+            LoadingTime = waitUntilTimeReached(now, after, 38)
             
             time.sleep(LoadingTime)
                 
             try:
-                Unfollow_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//button[contains(.,'Following') or contains(.,'Requested')]")))
+                Unfollow_button = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, "//button[contains(.,'Following') or contains(.,'Requested')]")))
                 Unfollow_button.click()
                 Unfollowed += 1
                     
             except Exception as e:
-                print (e)
+                print ('following or requested button from profile account not found')
                 pass
            
             if Unfollowed % 80 == 0:
@@ -241,8 +245,13 @@ def Unfollow(FollowedUrList):
 
             now = time.time()
             
-            WebDriverWait(driver, 20).until(EC.presence_of_element_located(
-                (By.XPATH, "//button[contains(.,'Follow')]")))
+            try:
+                WebDriverWait(driver, 20).until(EC.presence_of_element_located(
+                    (By.XPATH, "//button[contains(.,'Follow')]")))
+            
+            except Exception as e:
+            print ('follow button after unfollow not found')
+            pass
             
            
 #             print ('Unfollowed '),Unfollowed,('accounts')
@@ -254,8 +263,8 @@ def Unfollow(FollowedUrList):
     print ('UNFOLLOWED ACCOUNTS FOR TODAY:'),Unfollowed
 
 
-username = 'onpoint_facts'
-password = '158158123'
+username = 'puberty_goals.09'
+password = '158123RA'
 celebrityAccountURL = 'https://www.instagram.com/9gag/'
 
 GOOGLE_CHROME_BIN = r"/app/.apt/usr/bin/google-chrome"
