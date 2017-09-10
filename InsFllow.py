@@ -250,8 +250,8 @@ def Unfollow(FollowedUrList):
                     (By.XPATH, "//button[contains(.,'Follow')]")))
             
             except Exception as e:
-            print ('follow button after unfollow not found')
-            pass
+                print ('follow button after unfollow not found')
+                pass
             
            
 #             print ('Unfollowed '),Unfollowed,('accounts')
