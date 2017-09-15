@@ -199,6 +199,8 @@ def followActiveAccount():
                             WebDriverWait(driver, 2) \
                                 .until(
                                 EC.presence_of_element_located((By.XPATH, ("//*[@class='_mck9w _gvoze _f2mse']"))))
+                                
+                            time.sleep(2)
 
                             break
 
