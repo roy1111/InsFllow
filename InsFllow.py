@@ -229,7 +229,7 @@ def handleit():
         driver.refresh()
 
         try:
-            WebDriverWait(driver, 5).until(EC.presence_of_element_located(
+            WebDriverWait(driver, 6).until(EC.presence_of_element_located(
                 (By.CLASS_NAME, '_fd86t')))  ##AMOUNT OF POSTS
 
             break
