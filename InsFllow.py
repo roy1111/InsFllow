@@ -136,7 +136,7 @@ def followActiveAccount():
         print datetime.today()
         startHour = time.time()
 
-        for x in range(0, 80):
+        for x in range(0, 2):
 
             try:
                 follow_button = driver.find_element_by_xpath(
@@ -225,21 +225,22 @@ def followActiveAccount():
 
 def handleit():
     countit = 0
+    
     while True:
-        driver.refresh()
-
         try:
-            WebDriverWait(driver, 6).until(EC.presence_of_element_located(
+            driver.refresh()
+            
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located(
                 (By.CLASS_NAME, '_fd86t')))  ##AMOUNT OF POSTS
 
             break
 
         except:
-            pass
             countit += 1
 
-        if countit == 6:
-            break
+            if countit == 2:
+                break
+            pass
 
 
 def Unfollow(FollowedUrList):
@@ -252,12 +253,12 @@ def Unfollow(FollowedUrList):
         try:
             driver.get(url)
 
-            try:
-                WebDriverWait(driver, 5).until(EC.presence_of_element_located(
-                    (By.CLASS_NAME, '_fd86t')))
+#             try:
+#                 WebDriverWait(driver, 20).until(EC.presence_of_element_located(
+#                     (By.CLASS_NAME, '_fd86t')))
 
-            except:
-                handleit()
+#             except:
+#                 handleit()
 
             after = time.time()
 
@@ -268,10 +269,14 @@ def Unfollow(FollowedUrList):
             try:
                 Unfollow_button = WebDriverWait(driver, 5).until(EC.presence_of_element_located(
                     (By.XPATH, "//button[contains(.,'Following') or contains(.,'Requested')]")))
+                
+                driver.execute_script("window.stop();")
+                
                 Unfollow_button.click()
 
             except Exception as e:
                 print e
+                print 'shit'
 
             if Unfollowed % 80 == 0:
                 counterforwait += 1
