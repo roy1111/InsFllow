@@ -131,12 +131,12 @@ def followActiveAccount():
     #     print ("Site At Profile: "),driver.title.encode('utf-8')
     time.sleep(2)
 
-    for y in range(0, 12):
+    for y in range(0, 2):
 
         print datetime.today()
         startHour = time.time()
 
-        for x in range(0, 2):
+        for x in range(0, 80):
 
             try:
                 follow_button = driver.find_element_by_xpath(
@@ -265,12 +265,13 @@ def Unfollow(FollowedUrList):
             LoadingTime = waitUntilTimeReached(now, after, 41)
 
             time.sleep(LoadingTime)
+            
+            driver.execute_script("window.stop();")
 
             try:
                 Unfollow_button = WebDriverWait(driver, 5).until(EC.presence_of_element_located(
                     (By.XPATH, "//button[contains(.,'Following') or contains(.,'Requested')]")))
                 
-                driver.execute_script("window.stop();")
                 
                 Unfollow_button.click()
 
