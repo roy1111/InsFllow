@@ -216,7 +216,7 @@ def followActiveAccount():
 
         endHour = time.time()
 
-        LoadinggTimee = waitUntilTimeReached(startHour, endHour, 36)
+        LoadinggTimee = waitUntilTimeReached(startHour, endHour, 3600)
         time.sleep(LoadinggTimee)
 
     print ("TODAY PROGRAM FOLLOWED: "), FollowedUrList.__len__(), "Active: ", AmountOfActiveFollowed
