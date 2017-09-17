@@ -136,7 +136,7 @@ def followActiveAccount():
         print datetime.today()
         startHour = time.time()
 
-        for x in range(0, 80):
+        for x in range(0, 8):
 
             try:
                 follow_button = driver.find_element_by_xpath(
@@ -216,10 +216,10 @@ def followActiveAccount():
 
         endHour = time.time()
 
-        LoadinggTimee = waitUntilTimeReached(startHour, endHour, 3600)
+        LoadinggTimee = waitUntilTimeReached(startHour, endHour, 36)
         time.sleep(LoadinggTimee)
 
-    print ("TODAY PROGRAM FOLLOWED: "), FollowedUrList.__len__()
+    print ("TODAY PROGRAM FOLLOWED: "), FollowedUrList.__len__(), "Active: ", AmountOfActiveFollowed
     return FollowedUrList
 
 
@@ -252,17 +252,16 @@ def Unfollow(FollowedUrList):
     for url in FollowedUrList:
         try:
             driver.get(url)
+#             try:
+#                 WebDriverWait(driver, 20).until(EC.presence_of_element_located(
+#                     (By.CLASS_NAME, '_fd86t')))
 
-            try:
-                WebDriverWait(driver, 20).until(EC.presence_of_element_located(
-                    (By.CLASS_NAME, '_fd86t')))
-
-            except:
-                handleit()
+#             except:
+#                 handleit()
 
             after = time.time()
 
-            LoadingTime = waitUntilTimeReached(now, after, 41)
+            LoadingTime = waitUntilTimeReached(now, after, 40)
 
             time.sleep(LoadingTime)
             
@@ -316,8 +315,9 @@ def handleExceptionEnteringAccount():
 
         Unfollow_button.click()
 
-    except:
-        print ('following or requested button from profile account not found')
+    except Exception as e:
+        print (e)
+        print 'shit1'
         pass
 
 
@@ -331,8 +331,9 @@ def handleExceptionAfterClick(Unfollowed):
         Unfollowed += 1
         return Unfollowed
 
-    except:
-        print ('follow button after unfollow not found')
+    except Exception as e:
+        print (e)
+        print 'shit2'
         return Unfollowed
 
 
