@@ -251,19 +251,17 @@ def Unfollow(FollowedUrList):
 
     for url in FollowedUrList:
         try:
-            print 'dfafnl'
             driver.get(url)
-            print 'ss'
-#             try:
-#                 WebDriverWait(driver, 20).until(EC.presence_of_element_located(
-#                     (By.CLASS_NAME, '_fd86t')))
+            try:
+                WebDriverWait(driver, 20).until(EC.presence_of_element_located(
+                    (By.CLASS_NAME, '_fd86t')))
 
-#             except:
-#                 handleit()
+            except:
+                handleit()
 
             after = time.time()
 
-            LoadingTime = waitUntilTimeReached(now, after, 40)
+            LoadingTime = waitUntilTimeReached(now, after, 41)
 
             time.sleep(LoadingTime)
             
@@ -278,7 +276,7 @@ def Unfollow(FollowedUrList):
                 print e
                 print 'shit'
 
-            if Unfollowed % 80 == 0:
+            if Unfollowed % 80 == 0 and Unfollowed != 0:
                 counterforwait += 1
                 TimeTowait = 3600 * counterforwait
                 EndHour = time.time()
