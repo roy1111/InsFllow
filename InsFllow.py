@@ -407,7 +407,7 @@ def handleExceptionAfterClick(Unfollowed):
         return Unfollowed
 
 
-username = 'alpha__millionaire'
+username = 'onpoint_facts'
 password = '158158123'
 celebrityAccountURL = 'https://www.instagram.com/9gag/'
 
