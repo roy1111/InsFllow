@@ -84,7 +84,7 @@ def getInsideSomeAccount(index):
         EC.presence_of_all_elements_located((By.CLASS_NAME, '_6e4x5')))  ##ELEMENT NEEDS CHANGE* FINDS ALL LIST ITEMS
     Profile = WebDriverWait(driver, 5).until(
         EC.presence_of_all_elements_located((By.XPATH, "//*[@class='_2g7d5 notranslate _o5iw8']")))[
-        index]  ## THE ACCOUNT SECTION
+        index]  ## ELEMENT NEEDS CHANGE
 
     Profile.click()
 
@@ -119,6 +119,7 @@ def handleExceptionForFollow(FollowedUrList):
 def followActiveAccount():
     AmountOfActiveFollowed = 0
     AmountOfFectiveFollowed = 0
+    now = time.time()
     index = 0
     FollowedUrList = []
 
@@ -126,7 +127,7 @@ def followActiveAccount():
     getInsideSomeAccount(index)
 
     WebDriverWait(driver, 5).until(EC.presence_of_element_located(
-        (By.CLASS_NAME, '_fd86t')))  ## WAITS UNTIL THE AMOUNT POSTS ELEMENT IS AVAILABLE
+        (By.CLASS_NAME, '_fd86t')))  ##ELEMENT NEEDS CHANGE* WAITS UNTIL THE AMOUNT POSTS ELEMENT IS AVAILABLE
 
     #     print ("Site At Profile: "),driver.title.encode('utf-8')
     time.sleep(2)
@@ -136,7 +137,7 @@ def followActiveAccount():
         print datetime.today()
         startHour = time.time()
 
-        for x in range(0, 67):
+        for x in range(0, 40):
 
             try:
                 follow_button = driver.find_element_by_xpath(
@@ -180,7 +181,7 @@ def followActiveAccount():
 
                         after = time.time()
 
-                        if int(after) - int(now) > 39.5:  ##THERE IS A TIME.SLEEP FOR 2 SEC
+                        if int(after) - int(now) > 84.5:  ##THERE IS A TIME.SLEEP FOR 2 SEC
                             AmountOfFectiveFollowed += 1
                             time.sleep(2)
                             #                             print ('Fictive Follow: '),AmountOfFectiveFollowed
@@ -191,7 +192,7 @@ def followActiveAccount():
                             AmountOfActiveFollowed += 1
 
                             after = time.time()
-                            LoadingTime = waitUntilTimeReached(now, after, 41)
+                            LoadingTime = waitUntilTimeReached(now, after, 86)
                             time.sleep(LoadingTime)
 
                             #                             print ('Active Follow: '),AmountOfActiveFollowed
@@ -219,35 +220,13 @@ def followActiveAccount():
         LoadinggTimee = waitUntilTimeReached(startHour, endHour, 3600)
         time.sleep(LoadinggTimee)
 
-    print ("TODAY PROGRAM FOLLOWED: "), FollowedUrList.__len__(), "Active: ", AmountOfActiveFollowed
+    print ("TODAY PROGRAM FOLLOWED: "), FollowedUrList.__len__()
     return FollowedUrList
-
-
-def handleit():
-    countit = 0
-
-    while True:
-        try:
-            driver.refresh()
-
-            WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-                (By.CLASS_NAME, '_fd86t')))  ##AMOUNT OF POSTS
-
-            break
-
-        except:
-            countit += 1
-
-            if countit == 2:
-                break
-            pass
 
 
 def Unfollow(FollowedUrList):
     Unfollowed = 0
-    shitty = []
-    piceshit = False
-    piceshit1 = False
+    fucked = 0
     Starthour = time.time()
     now = time.time()
     counterforwait = 0
@@ -255,39 +234,32 @@ def Unfollow(FollowedUrList):
     for url in FollowedUrList:
         try:
             driver.get(url)
-            try:
-                WebDriverWait(driver, 20).until(EC.presence_of_element_located(
-                    (By.CLASS_NAME, '_fd86t'))) ## AMOUNT OF POSTS
-
-            except:
-                handleit()
 
             after = time.time()
 
-            LoadingTime = waitUntilTimeReached(now, after, 41)
+            LoadingTime = waitUntilTimeReached(now, after, 86)
 
             time.sleep(LoadingTime)
+
+            print "Account: ", driver.title
 
             try:
                 Unfollow_button = WebDriverWait(driver, 5).until(EC.presence_of_element_located(
                     (By.XPATH, "//button[contains(.,'Following') or contains(.,'Requested')]")))
-
                 Unfollow_button.click()
 
             except Exception as e:
-                print e
-                print 'shit'
-                piceshit = True
+                print (e), "Cant Find Unfollow"
+                fucked += 1
+                # handleExceptionEnteringAccount()
 
-            if Unfollowed % 67 == 0 and Unfollowed != 0:
+            if Unfollowed % 80 == 0 and Unfollowed != 0:
                 counterforwait += 1
                 TimeTowait = 3600 * counterforwait
-                Unfollowed += tryunfollowfucked(shitty)
                 EndHour = time.time()
                 LoadinggTimme = waitUntilTimeReached(Starthour, EndHour, TimeTowait)
                 time.sleep(LoadinggTimme)
                 print datetime.today()
-                print 'Unfollowed Until Now: ',Unfollowed
 
             now = time.time()
 
@@ -295,104 +267,43 @@ def Unfollow(FollowedUrList):
                 WebDriverWait(driver, 20).until(EC.presence_of_element_located(
                     (By.XPATH, "//button[contains(.,'Follow')]")))
 
+                time.sleep(1)
+
                 Unfollowed += 1
 
-            except:
-                piceshit1 = True
-
-            if piceshit and piceshit1:
-                shitty.append(driver.current_url)
-
-            elif piceshit1:
-                driver.refresh()
-
-                try:
-                    WebDriverWait(driver, 20).until(EC.presence_of_element_located(
-                        (By.XPATH, "//button[contains(.,'Follow')]")))
-
-                    Unfollowed += 1
-
-                except:
-                    shitty.append(driver.current_url)
+            except Exception as e:
+                print (e), "Cant Find Follow After Unfollow"
+                # Unfollowed = handleExceptionAfterClick(Unfollowed)
+                fucked += 1
 
 
-                    ## print ('Unfollowed '),Unfollowed,('accounts')
+                # print ('Unfollowed '),Unfollowed,('accounts')
 
         except Exception as e:
             print (e)
             pass
 
     print ('UNFOLLOWED ACCOUNTS FOR TODAY:'), Unfollowed
+    print "NUMBER OF FUCKED ACCOUNTS:", fucked
 
 
 def handleExceptionEnteringAccount():
     driver.refresh()
-
+    time.sleep(5)
     try:
         Unfollow_button = WebDriverWait(driver, 5).until(EC.presence_of_element_located(
             (By.XPATH, "//button[contains(.,'Following') or contains(.,'Requested')]")))
 
         Unfollow_button.click()
 
-    except Exception as e:
-        print (e)
-        print 'shit1'
+    except:
+        print ('following or requested button from profile account not found')
         pass
-
-
-def tryunfollowfucked(shittedlist):
-    counnt = 0
-    now = time.time()
-
-
-    for url in shittedlist:
-        try:
-            driver.get(url)
-
-            try:
-                WebDriverWait(driver, 20).until(EC.presence_of_element_located(
-                    (By.CLASS_NAME, '_fd86t')))  ## AMOUNT OF POSTS
-
-            except:
-                handleit()
-
-            after = time.time()
-
-            LoadingTime = waitUntilTimeReached(now, after, 41)
-
-            time.sleep(LoadingTime)
-
-            try:
-                Unfollow_button = WebDriverWait(driver, 5).until(EC.presence_of_element_located(
-                    (By.XPATH, "//button[contains(.,'Following') or contains(.,'Requested')]")))
-
-                Unfollow_button.click()
-
-            except:
-                print 'shitted list sucks'
-
-            now = time.time()
-
-            try:
-                WebDriverWait(driver, 20).until(EC.presence_of_element_located(
-                    (By.XPATH, "//button[contains(.,'Follow')]")))
-
-                counnt += 1
-
-            except:
-                print 'shit list sucksss'
-
-            ## print ('Unfollowed '),Unfollowed,('accounts')
-
-        except Exception as e:
-            print (e)
-            pass
-
-        return counnt
 
 
 def handleExceptionAfterClick(Unfollowed):
     driver.refresh()
+    time.sleep(5)
 
     try:
         WebDriverWait(driver, 20).until(EC.presence_of_element_located(
@@ -401,14 +312,13 @@ def handleExceptionAfterClick(Unfollowed):
         Unfollowed += 1
         return Unfollowed
 
-    except Exception as e:
-        print (e)
-        print 'shit2'
+    except:
+        print ('follow button after unfollow not found')
         return Unfollowed
 
 
-username = 'onpoint_facts'
-password = '158158123'
+username = 'puberty_goals.09'
+password = '158123RA'
 celebrityAccountURL = 'https://www.instagram.com/9gag/'
 
 GOOGLE_CHROME_BIN = r"/app/.apt/usr/bin/google-chrome"
