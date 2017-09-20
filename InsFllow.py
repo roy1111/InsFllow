@@ -322,8 +322,8 @@ def handleExceptionAfterClick(Unfollowed):
         return Unfollowed
 
 
-username = 'puberty_goals.09'
-password = '158123RA'
+username = 'alpha__millionaire'
+password = '158158123'
 celebrityAccountURL = 'https://www.instagram.com/9gag/'
 
 GOOGLE_CHROME_BIN = r"/app/.apt/usr/bin/google-chrome"
@@ -347,7 +347,7 @@ while True:
 
     ## checks if 24 hours had passed - if not, waits until 24H and 2 minutes will pass
     afterr = time.time()
-    LoadinggTime = waitUntilTimeReached(noww, afterr, 86520)
+    LoadinggTime = waitUntilTimeReached(noww, afterr, 8652000) ## REMOVE TWO ZEROS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     time.sleep(LoadinggTime)
 
     print 'PROGRAM FINISHED FOR TODAY', datetime.today()
