@@ -240,9 +240,14 @@ def Unfollow(FollowedUrList):
             LoadingTime = waitUntilTimeReached(now, after, 86)
 
             time.sleep(LoadingTime)
-
-            print "Account: ", driver.title
-
+            
+            try:
+                print "Account: ", driver.title.encode('utf-8')
+                
+            except Exception as e:
+                print (e)
+                pass
+            
             try:
                 Unfollow_button = WebDriverWait(driver, 5).until(EC.presence_of_element_located(
                     (By.XPATH, "//button[contains(.,'Following') or contains(.,'Requested')]")))
