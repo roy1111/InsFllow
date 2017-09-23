@@ -272,7 +272,7 @@ def Unfollow(FollowedUrList):
                 fucked += 1
                 shit1 = True
 
-            if Unfollowed % 80 == 0 and Unfollowed != 0:
+            if Unfollowed % 70 == 0 and Unfollowed != 0:
                 counterforwait += 1
                 TimeTowait = 3600 * counterforwait
                 EndHour = time.time()
@@ -332,7 +332,7 @@ while True:
 
     ## checks if 24 hours had passed - if not, waits until 24H and 2 minutes will pass
     afterr = time.time()
-    LoadinggTime = waitUntilTimeReached(noww, afterr, 865200)  ## REMOVE 1 ZEROS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    LoadinggTime = waitUntilTimeReached(noww, afterr, 86520)  
     time.sleep(LoadinggTime)
 
     print 'PROGRAM FINISHED FOR TODAY', datetime.today()
