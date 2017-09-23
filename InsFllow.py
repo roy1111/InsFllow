@@ -133,12 +133,12 @@ def followActiveAccount():
     #     print ("Site At Profile: "),driver.title.encode('utf-8')
     time.sleep(2)
 
-    for y in range(0, 1):
+    for y in range(0, 12):
 
         print datetime.today()
         startHour = time.time()
 
-        for x in range(0, 1):
+        for x in range(0, 70):
 
             try:
                 follow_button = driver.find_element_by_xpath(
@@ -218,7 +218,7 @@ def followActiveAccount():
 
         endHour = time.time()
 
-        LoadinggTimee = waitUntilTimeReached(startHour, endHour, 36)
+        LoadinggTimee = waitUntilTimeReached(startHour, endHour, 3600)
         time.sleep(LoadinggTimee)
 
     print ("TODAY PROGRAM FOLLOWED: "), FollowedUrList.__len__()
