@@ -307,8 +307,8 @@ def Unfollow(FollowedUrList):
     print shitted
 
 
-username = 'puberty_goals.09'
-password = '158123RA'
+username = 'alpha__millionaire'
+password = '158158123'
 celebrityAccountURL = 'https://www.instagram.com/9gag/'
 
 GOOGLE_CHROME_BIN = r"/app/.apt/usr/bin/google-chrome"
