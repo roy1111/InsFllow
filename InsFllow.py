@@ -112,7 +112,7 @@ def handleExceptionForFollow(FollowedUrList):
         return FollowedUrList
 
     except Exception as e:
-        print e
+#         print e
         return FollowedUrList
         pass
 
@@ -255,11 +255,11 @@ def Unfollow(FollowedUrList):
 
             time.sleep(LoadingTime)
 
-            try:
-                print "Account: ", driver.title.encode('utf-8')
+#             try:
+#                 print "Account: ", driver.title.encode('utf-8')
 
-            except:
-                pass
+#             except:
+#                 pass
 
             try:
                 Unfollow_button = WebDriverWait(driver, 5).until(EC.presence_of_element_located(
@@ -294,7 +294,28 @@ def Unfollow(FollowedUrList):
                 shit2 = True
 
             if shit2 and shit1:
-                shitted.append(url)
+                driver.get(url)
+                time.sleep(5)
+                
+                try:
+                    Unfollow_button = WebDriverWait(driver, 5).until(EC.presence_of_element_located(
+                        (By.XPATH, "//button[contains(.,'Following') or contains(.,'Requested')]")))
+                    Unfollow_button.click()
+
+                except:
+                    pass
+                
+                try:
+                    WebDriverWait(driver, 20).until(EC.presence_of_element_located(
+                        (By.XPATH, "//button[contains(.,'Follow')]")))
+
+                    time.sleep(1)
+
+                    Unfollowed += 1
+
+                except Exception as e:
+                    pass
+
 
                 # print ('Unfollowed '),Unfollowed,('accounts')
 
@@ -304,11 +325,10 @@ def Unfollow(FollowedUrList):
 
     print ('UNFOLLOWED ACCOUNTS FOR TODAY:'), Unfollowed
     print "NUMBER OF FUCKED ACCOUNTS:", fucked
-    print shitted
 
 
-username = 'alpha__millionaire'
-password = '158158123'
+username = 'puberty_goals.09'
+password = '158123RA'
 celebrityAccountURL = 'https://www.instagram.com/9gag/'
 
 GOOGLE_CHROME_BIN = r"/app/.apt/usr/bin/google-chrome"
@@ -336,3 +356,4 @@ while True:
     time.sleep(LoadinggTime)
 
     print 'PROGRAM FINISHED FOR TODAY', datetime.today()
+    break
