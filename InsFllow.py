@@ -137,7 +137,7 @@ def followActiveAccount():
         print datetime.today()
         startHour = time.time()
 
-        for x in range(0, 70):
+        for x in range(0, 65):
 
             try:
                 follow_button = driver.find_element_by_xpath(
@@ -181,7 +181,7 @@ def followActiveAccount():
 
                         after = time.time()
 
-                        if int(after) - int(now) > 45.5:  ##THERE IS A TIME.SLEEP FOR 2 SEC
+                        if int(after) - int(now) > 49.5:  ##THERE IS A TIME.SLEEP FOR 2 SEC
                             AmountOfFectiveFollowed += 1
                             time.sleep(2)
                             #                             print ('Fictive Follow: '),AmountOfFectiveFollowed
@@ -192,7 +192,7 @@ def followActiveAccount():
                             AmountOfActiveFollowed += 1
 
                             after = time.time()
-                            LoadingTime = waitUntilTimeReached(now, after, 47)
+                            LoadingTime = waitUntilTimeReached(now, after, 51)
                             time.sleep(LoadingTime)
 
                             #                             print ('Active Follow: '),AmountOfActiveFollowed
@@ -237,7 +237,7 @@ def Unfollow(FollowedUrList):
 
             after = time.time()
 
-            LoadingTime = waitUntilTimeReached(now, after, 47)
+            LoadingTime = waitUntilTimeReached(now, after, 51)
 
             time.sleep(LoadingTime)
 
@@ -258,7 +258,7 @@ def Unfollow(FollowedUrList):
                 fucked += 1
                 # handleExceptionEnteringAccount()
 
-            if Unfollowed % 70 == 0 and Unfollowed != 0:
+            if Unfollowed % 65 == 0 and Unfollowed != 0:
                 counterforwait += 1
                 TimeTowait = 3600 * counterforwait
                 EndHour = time.time()
