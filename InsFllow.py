@@ -351,4 +351,3 @@ while True:
     time.sleep(LoadinggTime)
 
     print 'PROGRAM FINISHED FOR TODAY', datetime.today()
-    break
