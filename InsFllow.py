@@ -67,27 +67,34 @@ def loginToAccount(UsrName, Password):
 
 
 def enterCelebrityAccountFollowers(url):
-    ## GOES TO THE CELEBRITY ACCOUNT
-    driver.get(url)
+    try:
+        ## GOES TO THE CELEBRITY ACCOUNT
+        driver.get(url)
 
-    ## ENTERS CELEBRITY ACCOUNT FOLLOWERS
-    Followers_button = WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.PARTIAL_LINK_TEXT, 'followers')))
-    Followers_button.click()
+        ## ENTERS CELEBRITY ACCOUNT FOLLOWERS
+        Followers_button = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.PARTIAL_LINK_TEXT, 'followers')))
+        Followers_button.click()
+    
+    except:
+        print 'celebrity followers were not found'
 
 
 #     print (driver.title).encode('utf-8')
 
 def getInsideSomeAccount(index):
-    ## ENTERS THE ACCOUNT PROFILE AND WAITS FOR ALL PROFILES TO LOAD - THEN CLICKS ON PROFILE BY INDEX
-    WebDriverWait(driver, 5).until(
-        EC.presence_of_all_elements_located((By.CLASS_NAME, '_6e4x5')))  ##ELEMENT NEEDS CHANGE* FINDS ALL LIST ITEMS
-    Profile = WebDriverWait(driver, 5).until(
-        EC.presence_of_all_elements_located((By.XPATH, "//*[@class='_2g7d5 notranslate _o5iw8']")))[
-        index]  ## ELEMENT NEEDS CHANGE
+    try:
+        ## ENTERS THE ACCOUNT PROFILE AND WAITS FOR ALL PROFILES TO LOAD - THEN CLICKS ON PROFILE BY INDEX
+        WebDriverWait(driver, 5).until(
+            EC.presence_of_all_elements_located((By.CLASS_NAME, '_6e4x5')))  ##ELEMENT NEEDS CHANGE* FINDS ALL LIST ITEMS
+        Profile = WebDriverWait(driver, 5).until(
+            EC.presence_of_all_elements_located((By.XPATH, "//*[@class='_2g7d5 notranslate _o5iw8']")))[
+            index]  ## ELEMENT NEEDS CHANGE
 
-    Profile.click()
-
+        Profile.click()
+    
+    except:
+        pass
 
 def waitUntilTimeReached(FirstTime, SecondTime, TimeDesiredToSleep):
     TimePassed = SecondTime - FirstTime
