@@ -327,6 +327,17 @@ def handleExceptionAfterClick(Unfollowed):
     except:
         print ('follow button after unfollow not found')
         return Unfollowed
+    
+    
+def handleCookies(cookiesList):
+    driver.delete_all_cookies()
+    
+    for cookie in cookiesList:
+        try:
+            driver.add_cookie(cookie)
+
+        except:
+            pass
 
 
 username = 'puberty_goals.09'
@@ -345,12 +356,17 @@ driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chro
 driver.maximize_window()
 
 loginToAccount(username, password)
+cookies_list = driver.get_cookies()
+
 
 while True:
     noww = time.time()
 
     Followed = followActiveAccount()
     Unfollow(Followed)
+    
+    handleCookies(cookies_list)
+
 
     ## checks if 24 hours had passed - if not, waits until 24H and 2 minutes will pass
     afterr = time.time()
