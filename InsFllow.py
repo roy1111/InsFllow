@@ -340,8 +340,8 @@ def handleCookies(cookiesList):
             pass
 
 
-username = 'puberty_goals.09'
-password = '158123RA'
+username = 'ace.yourself'
+password = '158158123'
 celebrityAccountURL = 'https://www.instagram.com/9gag/'
 
 GOOGLE_CHROME_BIN = r"/app/.apt/usr/bin/google-chrome"
