@@ -342,7 +342,7 @@ def handleCookies(cookiesList):
 
 username = 'ace.yourself'
 password = '158158123'
-celebrityAccountURL = 'https://www.instagram.com/9gag/'
+celebrityAccountURL = 'https://www.instagram.com/justinbieber/'
 
 GOOGLE_CHROME_BIN = r"/app/.apt/usr/bin/google-chrome"
 CHROMEDRIVER_PATH = r"/app/.chromedriver/bin/chromedriver"
