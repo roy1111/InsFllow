@@ -342,7 +342,7 @@ def handleCookies(cookiesList):
 
 username = 'alpha__millionaire'
 password = '158158123'
-celebrityAccountURL = 'https://www.instagram.com/khloekardashian/'
+celebrityAccountURL = 'https://www.instagram.com/davidbeckham/'
 
 GOOGLE_CHROME_BIN = r"/app/.apt/usr/bin/google-chrome"
 CHROMEDRIVER_PATH = r"/app/.chromedriver/bin/chromedriver"
