@@ -361,7 +361,8 @@ cookies_list = driver.get_cookies()
 
 while True:
     noww = time.time()
-
+    sta = datetime.today()
+    
     Followed = followActiveAccount()
     Unfollow(Followed)
     
@@ -372,5 +373,6 @@ while True:
     afterr = time.time()
     LoadinggTime = waitUntilTimeReached(noww, afterr, 86520)  
     time.sleep(LoadinggTime)
-
+    
+    print 'PROGRAM STARTED FOR TODAY', sta
     print 'PROGRAM FINISHED FOR TODAY', datetime.today()
