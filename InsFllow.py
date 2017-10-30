@@ -9,17 +9,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 
 
-# from pyvirtualdisplay import Display
-#
-# # initiate virtual display
-# display = Display(visible=0, size=(1080, 920))
-# display.start()
-
-
 def loginToAccount(UsrName, Password):
     ## GOES TO INSTAGRAM LOGIN PAGE
     driver.get('https://www.instagram.com/accounts/login/')
-    print (driver.title).encode('utf-8')
+    # print (driver.title).encode('utf-8')
 
     ## ENTERS THE USERNAME AND PASSWORD
     user = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, "//input[@name='username']")))
@@ -30,7 +23,7 @@ def loginToAccount(UsrName, Password):
     time.sleep(1)
     driver.find_element_by_xpath("//button[contains(.,'Log in')]").click()
     time.sleep(2)
-    print (driver.title).encode('utf-8')
+    # print (driver.title).encode('utf-8')
     print (driver.current_url)
 
     ## DELETE AFTER
@@ -47,7 +40,7 @@ def loginToAccount(UsrName, Password):
         time.sleep(20)
 
         driver.get('https://www.instagram.com/accounts/login/')
-        print driver.title.encode('utf-8')
+        # print driver.title.encode('utf-8')
 
         ## ENTERS THE USERNAME AND PASSWORD
         user = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, "//input[@name='username']")))
@@ -59,7 +52,7 @@ def loginToAccount(UsrName, Password):
         time.sleep(1)
         driver.find_element_by_xpath("//button[contains(.,'Log in')]").click()
         time.sleep(2)
-        print driver.title.encode('utf-8')
+        # print driver.title.encode('utf-8')
         print (driver.current_url)
 
     except:
@@ -74,27 +67,30 @@ def enterCelebrityAccountFollowers(url):
         ## ENTERS CELEBRITY ACCOUNT FOLLOWERS
         Followers_button = WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.PARTIAL_LINK_TEXT, 'followers')))
+
         Followers_button.click()
-    
+
     except:
         print 'celebrity followers were not found'
 
 
-#     print (driver.title).encode('utf-8')
+# print (driver.title).encode('utf-8')
 
 def getInsideSomeAccount(index):
     try:
         ## ENTERS THE ACCOUNT PROFILE AND WAITS FOR ALL PROFILES TO LOAD - THEN CLICKS ON PROFILE BY INDEX
         WebDriverWait(driver, 5).until(
-            EC.presence_of_all_elements_located((By.CLASS_NAME, '_6e4x5')))  ##ELEMENT NEEDS CHANGE* FINDS ALL LIST ITEMS
+            EC.presence_of_all_elements_located(
+                (By.CLASS_NAME, '_6e4x5')))  ##ELEMENT NEEDS CHANGE* FINDS ALL LIST ITEMS
         Profile = WebDriverWait(driver, 5).until(
             EC.presence_of_all_elements_located((By.XPATH, "//*[@class='_2g7d5 notranslate _o5iw8']")))[
             index]  ## ELEMENT NEEDS CHANGE
 
         Profile.click()
-    
+
     except:
         pass
+
 
 def waitUntilTimeReached(FirstTime, SecondTime, TimeDesiredToSleep):
     TimePassed = SecondTime - FirstTime
@@ -118,7 +114,7 @@ def handleExceptionForFollow(FollowedUrList):
         return FollowedUrList
 
     except Exception as e:
-#         print e
+        #         print e
         return FollowedUrList
         pass
 
@@ -141,7 +137,7 @@ def followActiveAccount():
 
     for y in range(0, 12):
 
-        print datetime.today()
+        # print datetime.today()
         startHour = time.time()
 
         for x in range(0, 65):
@@ -195,7 +191,7 @@ def followActiveAccount():
                             break
 
                         ## CHECKS IF ACCOUNT HAS MORE THAN 40 POSTS - IF DOES, FOLLOWED
-                        elif 40 <= int(PostAmount) < 200:
+                        elif int(PostAmount) >= 1:
                             AmountOfActiveFollowed += 1
 
                             after = time.time()
@@ -218,7 +214,6 @@ def followActiveAccount():
                         driver.back()
 
                 except Exception as e:
-                    print (e)
                     enterCelebrityAccountFollowers(celebrityAccountURL)
                     index = 0
 
@@ -248,12 +243,12 @@ def Unfollow(FollowedUrList):
 
             time.sleep(LoadingTime)
 
-            try:
-                print "Account: ", driver.title.encode('utf-8')
-
-            except Exception as e:
-                print (e)
-                pass
+            # try:
+            #     print "Account: ", driver.title.encode('utf-8')
+            # 
+            # except Exception as e:
+            #     print (e)
+            #     pass
 
             try:
                 Unfollow_button = WebDriverWait(driver, 5).until(EC.presence_of_element_located(
@@ -261,7 +256,7 @@ def Unfollow(FollowedUrList):
                 Unfollow_button.click()
 
             except Exception as e:
-                print (e), "Cant Find Unfollow"
+                # print (e), "Cant Find Unfollow"
                 fucked += 1
                 # handleExceptionEnteringAccount()
 
@@ -271,7 +266,7 @@ def Unfollow(FollowedUrList):
                 EndHour = time.time()
                 LoadinggTimme = waitUntilTimeReached(Starthour, EndHour, TimeTowait)
                 time.sleep(LoadinggTimme)
-                print datetime.today()
+                # print datetime.today()
 
             now = time.time()
 
@@ -284,7 +279,7 @@ def Unfollow(FollowedUrList):
                 Unfollowed += 1
 
             except Exception as e:
-                print (e), "Cant Find Follow After Unfollow"
+                # print (e), "Cant Find Follow After Unfollow"
                 # Unfollowed = handleExceptionAfterClick(Unfollowed)
                 fucked += 1
 
@@ -292,11 +287,11 @@ def Unfollow(FollowedUrList):
                 # print ('Unfollowed '),Unfollowed,('accounts')
 
         except Exception as e:
-            print (e)
+            # print (e)
             pass
 
     print ('UNFOLLOWED ACCOUNTS FOR TODAY:'), Unfollowed
-    print "NUMBER OF FUCKED ACCOUNTS:", fucked
+    # print "NUMBER OF FUCKED ACCOUNTS:", fucked
 
 
 def handleExceptionEnteringAccount():
@@ -309,7 +304,7 @@ def handleExceptionEnteringAccount():
         Unfollow_button.click()
 
     except:
-        print ('following or requested button from profile account not found')
+        # print ('following or requested button from profile account not found')
         pass
 
 
@@ -325,13 +320,13 @@ def handleExceptionAfterClick(Unfollowed):
         return Unfollowed
 
     except:
-        print ('follow button after unfollow not found')
+        # print ('follow button after unfollow not found')
         return Unfollowed
-    
-    
+
+
 def handleCookies(cookiesList):
     driver.delete_all_cookies()
-    
+
     for cookie in cookiesList:
         try:
             driver.add_cookie(cookie)
@@ -356,23 +351,21 @@ driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chro
 driver.maximize_window()
 
 loginToAccount(username, password)
-cookies_list = driver.get_cookies()
-
+# cookies_list = driver.get_cookies()
 
 while True:
     noww = time.time()
     sta = datetime.today()
-    
+
     Followed = followActiveAccount()
     Unfollow(Followed)
-    
-    handleCookies(cookies_list)
 
+    # handleCookies(cookies_list)
 
     ## checks if 24 hours had passed - if not, waits until 24H and 2 minutes will pass
     afterr = time.time()
-    LoadinggTime = waitUntilTimeReached(noww, afterr, 86520)  
+    LoadinggTime = waitUntilTimeReached(noww, afterr, 86520)
     time.sleep(LoadinggTime)
-    
+
     print 'PROGRAM STARTED FOR TODAY', sta
     print 'PROGRAM FINISHED FOR TODAY', datetime.today()
