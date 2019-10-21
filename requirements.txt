@@ -2,7 +2,7 @@ Appium-Python-Client==0.24
 backports-abc==0.5
 bs4==0.0.1
 certifi==2017.4.17
-Flask==0.12.2
+Flask==1.0
 chardet==3.0.4
 chromedriver==2.24.1
 client==0.0.1
